@@ -6,24 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'SortingVisualization';
+  title = 'Selection Sort';
+  // ADD CHART OPTIONS. 
   chartOptions = {
-    responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+    responsive: true,
+    pointBorderWidth: 5,
   }
 
-  labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  labels =  [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  chartData = [
-    {
-      label: '1st Year',
-      data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
-    },
-    {
-      label: '2nd Year',
-      data: [47, 9, 28, 54, 77, 51, 24]
-    }
-  ];
+  chartData = [{
+      data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59, 47, 9, 28, 54, 77, 51, 24],
+    },];
 
   // CHART COLOR.
   colors = [
@@ -34,7 +29,7 @@ export class AppComponent {
       backgroundColor: 'rgba(30, 169, 224, 0.8)'
     }
   ]
-
+  
   // CHART CLICK EVENT.
   onChartClick(event) {
     console.log(event);
