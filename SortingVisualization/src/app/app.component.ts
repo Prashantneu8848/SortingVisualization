@@ -1,26 +1,30 @@
 import { Component} from '@angular/core';
 
-export interface Food {
+export interface Sorts {
   value: string;
   viewValue: string;
 }
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent{
-  title = 'Selection Sort';
+  title = 'Sorting Algorithms Visualization';
+
   // ADD CHART OPTIONS. 
   chartOptions = {
     responsive: true,
     pointBorderWidth: 5,
   }
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+
+  sorts: Sorts[] = [
+    {value: 'slection-0', viewValue: 'Selection Sort'},
+    {value: 'insertion-1', viewValue: 'Insertion Sort'},
+    {value: 'shell-2', viewValue: 'Shell Sort'},
+    {value: 'quick-2', viewValue: 'Quick Sort'},
+    {value: 'merge-2', viewValue: 'Merge Sort'}
   ];
 
   array = [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59, 47, 9, 28, 54, 77, 51, 24]
