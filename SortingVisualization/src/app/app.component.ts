@@ -1,5 +1,10 @@
 import { Component} from '@angular/core';
 
+export interface Food {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +17,12 @@ export class AppComponent{
     responsive: true,
     pointBorderWidth: 5,
   }
+  foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
+
   array = [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59, 47, 9, 28, 54, 77, 51, 24]
   labels =  [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
@@ -19,7 +30,6 @@ export class AppComponent{
   chartData = [{
       data: this.array,
     },];
-
   // CHART COLOR.
   colors = [
     { // 1st Year.
