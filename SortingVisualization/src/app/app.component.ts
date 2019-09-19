@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateArray();
+    this.selectionSort(this.array);
   }
   title = 'Sorting Algorithms Visualization';
 
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
   ];
 
   array = [];
-  labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+  labels = [];
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
   chartData = [{
@@ -57,10 +58,24 @@ export class AppComponent implements OnInit {
     for (let index = 0; index < 100; index++) {
       var num = Math.floor(Math.random() * Math.floor(50));
       this.array.push(num);
+      this.labels.push(index);
     }
   }
 
-  selectionSort() {
-    
+  selectionSort(array) {
+    for (let i = 0; i < array.length - 1; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[j] > array[i]) {
+          this.exchange(array, j, i)
+        }
+      }
+      
+    }
+  }
+
+  exchange(array, i, j) {
+    var temp = array[i];
+    array[i] = array[j]
+    array[j] = temp;
   }
 }
