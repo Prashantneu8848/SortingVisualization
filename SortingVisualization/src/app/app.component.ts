@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 export interface Sorts {
   value: string;
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
   chartData = [{
     data: this.array,
   },];
+  
   // CHART COLOR.
   colors = [
     { // 1st Year.
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit {
 
   populateArray() {
     for (let index = 0; index < 100; index++) {
-      var num = Math.floor(Math.random() * Math.floor(50));
+      var num = Math.floor(Math.random() * Math.floor(10000)) + 1;
       this.array.push(num);
       this.labels.push(index);
     }
@@ -66,14 +67,13 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < array.length - 1; i++) {
       for (let j = i + 1; j < array.length; j++) {
         if (array[j] > array[i]) {
-          this.exchange(array, j, i)
+          this.exchange(array, j, i);
         }
       }
-      
     }
   }
 
-  exchange(array, i, j) {
+  exchange(array, i: number, j: number) {
     var temp = array[i];
     array[i] = array[j]
     array[j] = temp;
