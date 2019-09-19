@@ -1,6 +1,7 @@
 <h1>
   {{title}}
 </h1>
+<button (click)="sort()">sort it</button>
 <mat-form-field>
   <mat-label>Favorite food</mat-label>
   <mat-select>
@@ -10,14 +11,5 @@
   </mat-select>
 </mat-form-field>
 <div>
-  <canvas
-      baseChart
-      [chartType]="'bar'"
-      [datasets]="chartData"
-      [labels]="labels"
-      [options]="chartOptions"
-      [legend]="true"
-      [colors]="colors"
-      (chartClick)="onChartClick($event)">
-  </canvas>
+  <canvas #lineChart>{{ chart }}</canvas>
 </div>
