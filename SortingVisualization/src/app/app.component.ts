@@ -16,8 +16,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart', {static: false}) el:ElementRef;
   constructor() { }
   chart;
-  array = [];
-  labels = [];
+  array;
+  labels;
   title = 'Sorting Algorithms Visualization';
 
   ngOnInit(): void {
@@ -61,16 +61,19 @@ export class AppComponent implements OnInit, AfterViewInit {
   sort() {
     this.selectionSort();
   }
-
+  reset() {
+    this.populateArray();
+    this.upDateData();
+  }
   upDateData() {
-    this.chart.data.datasets.forEach((dataset) => {
-        dataset.data = this.array;
-    });
+    this.chart.data.datasets[0].data = this.array;
     this.chart.update();
   }
 
   populateArray() {
-    for (let index = 0; index < 5; index++) {
+    this.array = [];
+    this.labels = [];
+    for (let index = 0; index < 50; index++) {
       var num = Math.floor(Math.random() * Math.floor(100)) + 1;
       this.array.push(num);
       this.labels.push(index);
@@ -80,8 +83,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   selectionSort() {
     for (let i = 0; i < this.array.length - 1; i++) {
       for (let j = i + 1; j < this.array.length; j++) {
-        if (this.array[j] > this.array[i]) {
-          this.exchange(this.array, j, i);
+        if (this.array[j] < this.array[i]) {
+          this.exchange(this.array, i, j);
           this.upDateData();
         }
       }
