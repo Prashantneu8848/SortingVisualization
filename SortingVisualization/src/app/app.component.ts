@@ -1,29 +1,58 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, Directive, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { Chart } from 'chart.js';
 
 export interface Sorts {
   value: string;
   viewValue: string;
 }
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChild('lineChart', { static: false }) el: ElementRef;
+  constructor() { }
+  chart;
+  array;
+  labels;
+  title = 'Sorting Algorithms Visualization';
 
   ngOnInit(): void {
     this.populateArray();
-    this.selectionSort(this.array);
-  }
-  title = 'Sorting Algorithms Visualization';
-
-  // ADD CHART OPTIONS. 
-  chartOptions = {
-    responsive: true,
-    pointBorderWidth: 5,
   }
 
+  ngAfterViewInit() {
+    this.chartit();
+  }
+
+  chartit() {
+    let htmlRef = this.el.nativeElement;
+    this.chart = new Chart(htmlRef, {
+      type: 'bar',
+      data: {
+        labels: this.labels,
+        datasets: [
+          {
+            data: this.array,
+            borderColor: "#3cba9f",
+            fill: false
+          },
+        ]
+      },
+      options: {
+        animation: {
+          duration: 0
+        },
+        responsive: true,
+        legend: {
+          display: false
+        },
+      }
+    });
+  }
   sorts: Sorts[] = [
     { value: 'slection-0', viewValue: 'Selection Sort' },
     { value: 'insertion-1', viewValue: 'Insertion Sort' },
@@ -32,42 +61,42 @@ export class AppComponent implements OnInit {
     { value: 'merge-2', viewValue: 'Merge Sort' }
   ];
 
-  array = [];
-  labels = [];
-
-  // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  chartData = [{
-    data: this.array,
-  },];
-  
-  // CHART COLOR.
-  colors = [
-    { // 1st Year.
-      backgroundColor: 'rgba(77,83,96,0.2)'
-    },
-    { // 2nd Year.
-      backgroundColor: 'rgba(30, 169, 224, 0.8)'
-    }
-  ]
-
-  // CHART CLICK EVENT.
-  onChartClick(event) {
-    console.log(event);
+  sort() {
+    this.selectionSort();
   }
-
+  reset() {
+    this.populateArray();
+    this.upDateData();
+  }
+  upDateData() {
+    this.chart.data.datasets[0].data = this.array;
+    this.chart.update();
+  }
+  failureCallback() {
+    console.log('failed');
+  }
+  passed() {
+    this.upDateData();
+    console.log("passed");
+  }
   populateArray() {
-    for (let index = 0; index < 100; index++) {
-      var num = Math.floor(Math.random() * Math.floor(10000)) + 1;
+    this.array = [];
+    this.labels = [];
+    for (let index = 0; index < 10; index++) {
+      var num = Math.floor(Math.random() * Math.floor(100)) + 1;
       this.array.push(num);
       this.labels.push(index);
     }
   }
 
-  selectionSort(array) {
-    for (let i = 0; i < array.length - 1; i++) {
-      for (let j = i + 1; j < array.length; j++) {
-        if (array[j] > array[i]) {
-          this.exchange(array, j, i);
+  async selectionSort() {
+    for (let i = 0; i < this.array.length - 1; i++) {
+      for (let j = i + 1; j < this.array.length; j++) {
+        if (this.array[j] < this.array[i]) {
+          this.exchange(this.array, i, j);
+          await this.delay(100);
+          this.upDateData();
+          this.passed();
         }
       }
     }
@@ -78,4 +107,10 @@ export class AppComponent implements OnInit {
     array[i] = array[j]
     array[j] = temp;
   }
+
+  delay(t) {
+    return new Promise(function(resolve) { 
+        setTimeout(() => resolve(), t);
+    });
+ }
 }
