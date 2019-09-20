@@ -13,7 +13,7 @@ export interface Sorts {
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild('lineChart', {static: false}) el:ElementRef;
+  @ViewChild('lineChart', { static: false }) el: ElementRef;
   constructor() { }
   chart;
   array;
@@ -43,6 +43,10 @@ export class AppComponent implements OnInit, AfterViewInit {
         ]
       },
       options: {
+        animation: {
+          onProgress: function (animation) {
+          }
+        },
         responsive: true,
         legend: {
           display: false
@@ -67,13 +71,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   upDateData() {
     this.chart.data.datasets[0].data = this.array;
+    const promise = this.chart.update(); 
+    promise.then(this.chart.update, this.failureCallback);
     this.chart.update();
   }
-
+  failureCallback() {
+    console.log('failed');
+  }
   populateArray() {
     this.array = [];
     this.labels = [];
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 10; index++) {
       var num = Math.floor(Math.random() * Math.floor(100)) + 1;
       this.array.push(num);
       this.labels.push(index);
