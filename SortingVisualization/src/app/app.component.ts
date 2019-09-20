@@ -47,14 +47,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         legend: {
           display: false
         },
-        scales: {
-          xAxes: [{
-            display: true
-          }],
-          yAxes: [{
-            display: true
-          }],
-        }
       }
     });
   }
@@ -67,23 +59,30 @@ export class AppComponent implements OnInit, AfterViewInit {
   ];
 
   sort() {
-    this.selectionSort(this.array);
+    this.selectionSort();
+  }
+
+  upDateData() {
+    this.chart.data.datasets.forEach((dataset) => {
+        dataset.data = this.array;
+    });
+    this.chart.update();
   }
 
   populateArray() {
-    for (let index = 0; index < 100; index++) {
-      var num = Math.floor(Math.random() * Math.floor(10000)) + 1;
+    for (let index = 0; index < 5; index++) {
+      var num = Math.floor(Math.random() * Math.floor(100)) + 1;
       this.array.push(num);
       this.labels.push(index);
     }
   }
 
-  selectionSort(array) {
-    for (let i = 0; i < array.length - 1; i++) {
-      for (let j = i + 1; j < array.length; j++) {
-        if (array[j] > array[i]) {
-          this.exchange(array, j, i);
-          this.chart.update();
+  selectionSort() {
+    for (let i = 0; i < this.array.length - 1; i++) {
+      for (let j = i + 1; j < this.array.length; j++) {
+        if (this.array[j] > this.array[i]) {
+          this.exchange(this.array, j, i);
+          this.upDateData();
         }
       }
     }
