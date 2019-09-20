@@ -44,8 +44,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       },
       options: {
         animation: {
-          onProgress: function (animation) {
-          }
+          duration: 0
         },
         responsive: true,
         legend: {
@@ -71,12 +70,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   upDateData() {
     this.chart.data.datasets[0].data = this.array;
-    const promise = this.chart.update(); 
-    promise.then(this.chart.update, this.failureCallback);
     this.chart.update();
   }
   failureCallback() {
     console.log('failed');
+  }
+  passed() {
+    this.upDateData();
+    console.log("passed");
   }
   populateArray() {
     this.array = [];
@@ -88,12 +89,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectionSort() {
+  async selectionSort() {
     for (let i = 0; i < this.array.length - 1; i++) {
       for (let j = i + 1; j < this.array.length; j++) {
         if (this.array[j] < this.array[i]) {
           this.exchange(this.array, i, j);
+          await this.delay(100);
           this.upDateData();
+          this.passed();
         }
       }
     }
@@ -104,4 +107,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     array[i] = array[j]
     array[j] = temp;
   }
+
+  delay(t) {
+    return new Promise(function(resolve) { 
+        setTimeout(() => resolve(), t);
+    });
+ }
 }
