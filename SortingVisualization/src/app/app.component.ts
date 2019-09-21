@@ -15,10 +15,17 @@ export interface Sorts {
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart', { static: false }) el: ElementRef;
   constructor() { }
-  chart;
+  chart: Chart;
   array: number[];
-  labels;
+  label;
   title = 'Sorting Algorithms Visualization';
+  sorts: Sorts[] = [
+    { value: 'slection-0', viewValue: 'Selection Sort' },
+    { value: 'insertion-1', viewValue: 'Insertion Sort' },
+    { value: 'shell-2', viewValue: 'Shell Sort' },
+    { value: 'quick-2', viewValue: 'Quick Sort' },
+    { value: 'merge-2', viewValue: 'Merge Sort' }
+  ];
 
   ngOnInit(): void {
     this.populateArray();
@@ -33,7 +40,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.chart = new Chart(htmlRef, {
       type: 'bar',
       data: {
-        labels: this.labels,
+        labels: this.label,
         datasets: [
           {
             data: this.array,
@@ -43,7 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       },
       options: {
         animation: {
-          duration: 0
+          duration: 0,
         },
         responsive: true,
         legend: {
@@ -52,14 +59,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  sorts: Sorts[] = [
-    { value: 'slection-0', viewValue: 'Selection Sort' },
-    { value: 'insertion-1', viewValue: 'Insertion Sort' },
-    { value: 'shell-2', viewValue: 'Shell Sort' },
-    { value: 'quick-2', viewValue: 'Quick Sort' },
-    { value: 'merge-2', viewValue: 'Merge Sort' }
-  ];
-
   sort() {
     this.selectionSort();
     //this.insertionSort();
@@ -78,15 +77,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   passed() {
     this.upDateData();
-    console.log("passed");
   }
   populateArray() {
     this.array = [];
-    this.labels = [];
+    this.label = [];
     for (let index = 0; index < 25; index++) {
       var num = Math.floor(Math.random() * Math.floor(100)) + 1;
       this.array.push(num);
-      this.labels.push(index);
+      this.label.push(index);
     }
   }
   async selectionSort() {
