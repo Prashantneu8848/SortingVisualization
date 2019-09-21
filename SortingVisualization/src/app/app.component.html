@@ -1,16 +1,30 @@
-<h1>
-  {{title}}
-</h1>
-<button (click)="sort()">sort it</button>
-<button (click)="reset()">reset it</button>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle>Created By Prashant Neupane</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p id="card-content">
+      Select a Sort Routine to visualize the Algorithm.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="sort()" class="button">SORT</button>
+    <button (click)="reset()" class="button">RESET</button>
+  </mat-card-actions>
+</mat-card>
 <div id="bar">
-    <canvas #lineChart>{{ chart }}</canvas>
+  <canvas #lineChart>{{ chart }}</canvas>
 </div>
 <mat-form-field>
-  <mat-label>Choose Sort Routine</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let sort of sorts" [value]="sort.value">
-      {{sort.viewValue}}
-    </mat-option>
+  <mat-label>Select an option</mat-label>
+  <mat-select [(value)]="selected">
+    <mat-option>None</mat-option>
+    <mat-option value="Selection Sort">Selection Sort</mat-option>
+    <mat-option value="Insertion Sort">Insertion Sort</mat-option>
+    <mat-option value="Shell Sort">Shell Short</mat-option>
+    <mat-option value="Quick Sort">Quick Sort</mat-option>
+    <mat-option value="Merge Sort">Merge Sort</mat-option>
   </mat-select>
 </mat-form-field>
+<p>You selected: {{selected}}</p>

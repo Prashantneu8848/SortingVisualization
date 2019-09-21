@@ -18,14 +18,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   chart: Chart;
   array: number[];
   label;
+  selected: string;
   title = 'Sorting Algorithms Visualization';
-  sorts: Sorts[] = [
-    { value: 'slection-0', viewValue: 'Selection Sort' },
-    { value: 'insertion-1', viewValue: 'Insertion Sort' },
-    { value: 'shell-2', viewValue: 'Shell Sort' },
-    { value: 'quick-2', viewValue: 'Quick Sort' },
-    { value: 'merge-2', viewValue: 'Merge Sort' }
-  ];
 
   ngOnInit(): void {
     this.populateArray();
@@ -60,8 +54,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
   sort() {
-    this.selectionSort();
-    //this.insertionSort();
+    if (this.selected === "Selection Sort") {
+      this.selectionSort();
+    } else if (this.selected === "Insertion Sort") {
+      this.insertionSort();
+    } else {
+      this.shellShort();  
+    }
   }
   reset() {
     this.populateArray();
@@ -120,6 +119,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         }
       }
     }
+  }
+  shellShort() {
+    console.log("this will be shell short");
   }
   colorChange(i: number, j: number, first_color: string, second_color: string) {
     this.chart.data.datasets[0].backgroundColor[i] = first_color;

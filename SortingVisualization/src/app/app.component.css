@@ -1,4 +1,23 @@
 #bar {
     height: 400px;
-    width: 800px;
+    width: 80%;
+    float: left;
+}
+.button {
+  margin-right: 20px;
+  color: blueviolet
+}
+.card {
+    max-width: 100%;
+}
+#card-content {
+    text-align: center;
+    background-color:rgb(106, 150, 76);  
+}
+#buttons {
+    margin: 20px;
+}
+* {
+    font-family: Montserrat;
+    font-size: 15px;
 }
