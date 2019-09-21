@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Directive, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
 export interface Sorts {
@@ -42,7 +42,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         ]
       },
       options: {
-        
+        animation: {
+          duration: 0
+        },
         responsive: true,
         legend: {
           display: false
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   sort() {
     this.selectionSort();
+    //this.insertionSort();
   }
   reset() {
     this.populateArray();
@@ -91,12 +94,29 @@ export class AppComponent implements OnInit, AfterViewInit {
       for (let j = i + 1; j < this.array.length; j++) {
         if (this.array[j] < this.array[i]) {
           this.colorChange(i, j, 'green', 'red')
-          await this.delay(500);
+          await this.delay(1);
           this.passed();
           this.exchange(this.array, i, j);
           await this.delay(800);
           this.passed();
           this.colorChange(i, j, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)' )
+          await this.delay(500);
+          this.passed();
+        }
+      }
+    }
+  }
+  async insertionSort() {
+    for (let i = 1; i < this.array.length - 1; i++) {
+      for (let j = i - 1; j > 0; j--) {
+        if (this.array[j] < this.array[j - 1]) {
+          this.colorChange(j, j - 1, 'green', 'red')
+          await this.delay(1);
+          this.passed();
+          this.exchange(this.array, j, j - 1);
+          await this.delay(800);
+          this.passed();
+          this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)' )
           await this.delay(500);
           this.passed();
         }
