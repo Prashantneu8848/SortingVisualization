@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     } else if (this.selected === "Insertion Sort") {
       this.insertionSort();
     } else {
-      this.shellShort();  
+      this.shellSort();  
     }
   }
   reset() {
@@ -120,8 +120,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     }
   }
-  shellShort() {
+  async shellSort() {
     console.log("this will be shell short");
+  }
+  async mergeSort() {
+
+  }
+  async quickSort() {
+    
   }
   colorChange(i: number, j: number, first_color: string, second_color: string) {
     this.chart.data.datasets[0].backgroundColor[i] = first_color;

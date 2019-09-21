@@ -1,6 +1,6 @@
 #bar {
     height: 400px;
-    width: 80%;
+    width: 70%;
     float: left;
 }
 .button {
@@ -16,8 +16,4 @@
 }
 #buttons {
     margin: 20px;
-}
-* {
-    font-family: Montserrat;
-    font-size: 15px;
 }
