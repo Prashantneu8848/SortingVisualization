@@ -8,10 +8,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { ChartsModule } from 'ng2-charts';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GraphComponent,
+    GraphComponent
   ],
   imports: [
     BrowserAnimationsModule,
