@@ -9,14 +9,29 @@ import { ChartsModule } from 'ng2-charts';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { GraphComponent } from './graph/graph.component';
+import { PathFinderComponent } from './path-finder/path-finder.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'pathfinder', component: PathFinderComponent },
+  { path: '',
+    redirectTo: '/',
+    pathMatch: 'full'
+  },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     GraphComponent,
-    GraphComponent
+    GraphComponent,
+    PathFinderComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }
+    ),
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

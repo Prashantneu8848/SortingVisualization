@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js';
-
+import { Router } from '@angular/router';
 export interface Sorts {
   value: string;
   viewValue: string;
@@ -14,7 +14,7 @@ export interface Sorts {
 
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart', { static: false }) el: ElementRef;
-  constructor() { }
+  constructor(private router: Router){}
   chart: Chart;
   array: number[];
   label;
@@ -27,6 +27,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.chartit();
+  }
+
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
   }
 
   chartit() {
