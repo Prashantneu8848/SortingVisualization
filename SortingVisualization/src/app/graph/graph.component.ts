@@ -7,9 +7,9 @@ export interface Sorts {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-graph',
+  templateUrl: './graph.component.html',
+  styleUrls: ['./graph.component.css']
 })
 
 export class GraphComponent implements OnInit, AfterViewInit {
