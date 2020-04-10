@@ -8,9 +8,9 @@ describe('PathFinderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PathFinderComponent ]
+      declarations: [PathFinderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

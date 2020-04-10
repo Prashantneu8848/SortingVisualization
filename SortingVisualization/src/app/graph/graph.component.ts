@@ -53,6 +53,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  
   sort() {
     if (this.selected === "Selection Sort") {
       this.selectionSort();
@@ -67,21 +68,26 @@ export class GraphComponent implements OnInit, AfterViewInit {
       this.quickSort();
     }
   }
+
   reset() {
     this.populateArray();
     this.chart.data.datasets[0].backgroundColor = []
     this.upDateData();
   }
+
   upDateData() {
     this.chart.data.datasets[0].data = this.array;
     this.chart.update();
   }
+
   failureCallback() {
     console.log('failed');
   }
+
   passed() {
     this.upDateData();
   }
+
   populateArray() {
     this.array = [];
     this.label = [];
@@ -91,6 +97,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
       this.label.push(index);
     }
   }
+
   async selectionSort() {
     for (let i = 0; i < this.array.length - 1; i++) {
       for (let j = i + 1; j < this.array.length; j++) {
@@ -108,6 +115,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
   async insertionSort() {
     for (let i = 1; i < this.array.length; i++) {
       for (let j = i; j > 0; j--) {
@@ -125,6 +133,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
   async shellSort() {
     var N = this.array.length;
     var h = 1;
@@ -152,118 +161,26 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
   async mergeSort() {
     var copy: number[] = [];
-    this.sortForMerge(this.array, copy, 0, this.array.length - 1);
   }
+
   async quickSort() {
     //this.sortForQuick(this.array, 0, this.array.length - 1);
   }
+
   colorChange(i: number, j: number, first_color: string, second_color: string) {
     this.chart.data.datasets[0].backgroundColor[i] = first_color;
     this.chart.data.datasets[0].backgroundColor[j] = second_color;
   }
+
   exchange(array: number[], i: number, j: number) {
     var temp = array[i];
     array[i] = array[j]
     array[j] = temp;
   }
+  
   delay(t: number) {
     return new Promise(function (resolve) {
       setTimeout(() => resolve(), t);
     });
   }
-  async merge(a: number[], aux: number[], lo: number, mid: number, hi: number) {
-    for (let k = lo; k <= hi; k++) {
-      aux[k] = a[k];
-    }
-    var i: number = lo;
-    var j: number = mid + 1;
-    for (let k = lo; k <= hi; k++) {
-      this.colorChange(j, j - 1, 'green', 'red')
-      await this.delay(1);
-      this.passed();
-      if (i > mid) {
-        a[k] = aux[j++];
-        await this.delay(1);
-        this.passed();
-        this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-        await this.delay(1);
-        this.passed();
-      }
-      else if (j > hi) {
-        a[k] = aux[i++];
-        await this.delay(1);
-        this.passed();
-        this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-        await this.delay(1);
-        this.passed();
-      }
-      else if (aux[i] > aux[j]) {
-        a[k] = aux[j++];
-        await this.delay(1);
-        this.passed();
-        this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-        await this.delay(1);
-        this.passed();
-      }
-      else {
-        a[k] = aux[i++];
-        await this.delay(1);
-        this.passed();
-        this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-        await this.delay(1);
-        this.passed();
-      }
-      await this.delay(1);
-      this.passed();
-      this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-      await this.delay(1);
-      this.passed();
-    }
-  }
-
-  sortForMerge(a: number[], aux: number[], lo: number, hi: number) {
-    // base statement
-    if (hi <= lo) return;
-    var mid = lo + (hi - lo) / 2;
-    this.sortForMerge(a, aux, lo, mid);
-    this.sortForMerge(a, aux, mid + 1, hi);
-    if (a[mid] < a[mid + 1]) return;
-    this.merge(a, aux, lo, mid, hi);
-  }
-  async partition(a: number[], lo: number, hi: number): Promise<number> {
-    var i = lo;
-    var j = hi + 1;
-    while (true) {
-      this.colorChange(j, j - 1, 'green', 'red')
-      await this.delay(1);
-      this.passed();
-      while (a[++i] < a[lo]) {
-        if (i == hi) break;
-      }
-      while (a[--j] > a[lo]) {
-        if (j == lo) break;
-      }
-      if (i >= j) break;
-      this.exchange(a, i, j);
-      await this.delay(1);
-      this.passed();
-      this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-      await this.delay(1);
-      this.passed();
-    }
-    this.exchange(a, lo, j);
-    await this.delay(1);
-    this.passed();
-    this.colorChange(j, j - 1, 'rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.1)')
-    await this.delay(1);
-    this.passed();
-    return j;
-  }
-  // sortForQuick(a: number[], lo: number, hi: number) {
-  //   // Dont forget to put the base statement in recustion function.
-  //   if (hi <= lo) return;
-  //   var j = this.partition(a, lo, hi);
-  //   this.sortForQuick(a, lo,  j - 1);
-  //   this.sortForQuick(a, j + 1, hi);
-  // }
 }
