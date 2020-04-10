@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { DropdownModule } from "ngx-dropdown";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GraphComponent } from './graph/graph.component';
+import { RouterModule, Routes } from '@angular/router';
+
+
+import { DropdownModule } from "ngx-dropdown";
 import { MatSelectModule } from '@angular/material/select';
 import { ChartsModule } from 'ng2-charts';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { GraphComponent } from './graph/graph.component';
-import { PathFinderComponent } from './path-finder/path-finder.component';
-import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: 'pathfinder', component: PathFinderComponent },
+  { path: 'sorting', component: GraphComponent },
   { path: '',
     redirectTo: '/',
     pathMatch: 'full'
@@ -23,21 +25,19 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent,
-    GraphComponent,
-    PathFinderComponent
+    GraphComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
     ),
-    BrowserAnimationsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    ChartsModule,
     DropdownModule,
     MatSelectModule,
+    ChartsModule,
     MatButtonModule,
     MatCardModule
   ],
