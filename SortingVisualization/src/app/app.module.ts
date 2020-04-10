@@ -13,9 +13,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { ChartsModule } from 'ng2-charts';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { PathFinderComponent } from './path-finder/path-finder.component';
 
 const appRoutes: Routes = [
   { path: 'sorting', component: GraphComponent },
+  { path: 'pathfinder', component: PathFinderComponent },
   { path: '',
     redirectTo: '/',
     pathMatch: 'full'
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent
+    GraphComponent,
+    PathFinderComponent
   ],
   imports: [
     RouterModule.forRoot(
